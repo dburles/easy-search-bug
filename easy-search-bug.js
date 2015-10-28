@@ -6,7 +6,20 @@ PeopleIndex = new EasySearch.Index({
   defaultSearchOptions: {
     limit: 20
   },
-  engine: new EasySearch.MongoDB()
+  engine: new EasySearch.MongoDB({
+    // Workaround:
+    // transform(doc) {
+    //   var transformedDoc = People._transform(doc);
+    //   doc.firstName = transformedDoc.firstName();
+    //   return doc;
+    // }
+  })
+});
+
+People.helpers({
+  firstName() {
+    return this.name.split(/\s/)[0];
+  }
 });
 
 if (Meteor.isServer) {
@@ -14,9 +27,6 @@ if (Meteor.isServer) {
     _.times(500, () => People.insert({ name: Fake.user().fullname }));
   }
 } else {
-  Template.searchA.helpers({
-    index: PeopleIndex
-  });
   Template.searchB.helpers({
     index: PeopleIndex
   });

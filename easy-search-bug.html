@@ -3,37 +3,8 @@
 </head>
 
 <body>
-  {{> searchA}}
+  {{> searchB}}
 </body>
-
-<template name="searchA">
-  {{> EasySearch.Input index=index}}
-  <hr>
-  {{#EasySearch.IfSearching index=index}}
-    Loading...
-  {{else}}
-    {{#EasySearch.IfNoResults index=index}}
-      No Results
-    {{else}}
-      <table>
-        <thead>
-          <tr>
-            <td>Name</td>
-          </tr>
-        </thead>
-        <tbody>
-          {{#EasySearch.Each index=index}}
-            <tr>
-              <td>{{name}}</td>
-            </tr>
-          {{/EasySearch.Each}}
-        </tbody>
-      </table>
-
-      {{> EasySearch.Pagination index=index}}
-    {{/EasySearch.IfNoResults}}
-  {{/EasySearch.IfSearching}}
-</template>
 
 <template name="searchB">
   {{> EasySearch.Input index=index}}
@@ -55,7 +26,7 @@
     <tbody>
       {{#EasySearch.Each index=index}}
         <tr>
-          <td>{{name}}</td>
+          <td>{{firstName}}</td>
         </tr>
       {{/EasySearch.Each}}
     </tbody>
