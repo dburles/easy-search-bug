@@ -1,0 +1,65 @@
+<head>
+  <title>easy-search-bug</title>
+</head>
+
+<body>
+  {{> searchA}}
+</body>
+
+<template name="searchA">
+  {{> EasySearch.Input index=index}}
+  <hr>
+  {{#EasySearch.IfSearching index=index}}
+    Loading...
+  {{else}}
+    {{#EasySearch.IfNoResults index=index}}
+      No Results
+    {{else}}
+      <table>
+        <thead>
+          <tr>
+            <td>Name</td>
+          </tr>
+        </thead>
+        <tbody>
+          {{#EasySearch.Each index=index}}
+            <tr>
+              <td>{{name}}</td>
+            </tr>
+          {{/EasySearch.Each}}
+        </tbody>
+      </table>
+
+      {{> EasySearch.Pagination index=index}}
+    {{/EasySearch.IfNoResults}}
+  {{/EasySearch.IfSearching}}
+</template>
+
+<template name="searchB">
+  {{> EasySearch.Input index=index}}
+  <hr>
+  {{#EasySearch.IfNoResults index=index}}
+    No Results
+  {{/EasySearch.IfNoResults}}
+
+  {{#EasySearch.IfSearching index=index}}
+    Loading...
+  {{/EasySearch.IfSearching}}
+
+  <table>
+    <thead>
+      <tr>
+        <td>Name</td>
+      </tr>
+    </thead>
+    <tbody>
+      {{#EasySearch.Each index=index}}
+        <tr>
+          <td>{{name}}</td>
+        </tr>
+      {{/EasySearch.Each}}
+    </tbody>
+  </table>
+
+  {{> EasySearch.Pagination index=index}}
+</template>
